@@ -1,0 +1,254 @@
+\documentclass{article}
+\usepackage[a4paper,left=2.54cm,right=2.54cm,top=2.5cm,bottom=2.5cm]{geometry}
+% \renewcommand{\baselinestretch}{1.2}
+% ----------------------------------------------------------------------------------------------------
+% Basic packages
+\RequirePackage{etex}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep}
+\setlist[enumerate]{noitemsep}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{linegoal}
+\usepackage{float}
+\usepackage[makeroom]{cancel}
+\usepackage{intcalc}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{titletoc}
+\usepackage{lscape} % landscape page
+\usepackage{verbatim}
+\usepackage{tabularx}
+\usepackage[page,toc,titletoc,title]{appendix}
+% ----------------------------------------------------------------------------------------------------
+% titlesec
+\usepackage{titlesec}
+\titleclass{\subsubparagraph}{straight}[\subparagraph]
+\newcounter{subsubparagraph}
+\renewcommand{\thesubsubparagraph}{\Alph{subsubparagraph}}
+\titleformat{\subsubparagraph}[runin]{\normalfont\normalsize\bfseries}{\thesubsubparagraph}{1em}{}
+\titlespacing*{\subsubparagraph} {2\parindent}{3.25ex plus 1ex minus .2ex}{1em}
+
+\titleclass{\subsubsubparagraph}{straight}[\subsubparagraph]
+\newcounter{subsubsubparagraph}
+\renewcommand{\thesubsubsubparagraph}{\Alph{subsubsubparagraph}}
+\titleformat{\subsubsubparagraph}[runin]{\normalfont\normalsize\bfseries}{\thesubsubsubparagraph}{1em}{}
+\titlespacing*{\subsubsubparagraph} {3\parindent}{3.25ex plus 1ex minus .2ex}{1em}
+
+% \newcommand{\thesectionprefix}{Lecture\ }
+% \titleformat{\section}{\normalfont\Large\bfseries}{\thesectionprefix\thesection.}{1em}{}
+% ----------------------------------------------------------------------------------------------------
+% tikz
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{automata,arrows}
+\usetikzlibrary{shapes.multipart}
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{calc}
+
+% Equal-size box
+\usepackage{eqparbox}
+\newcommand{\eqmathbox}[2][N]{\eqmakebox[#1]{$\displaystyle#2$}}
+% ----------------------------------------------------------------------------------------------------
+% NN graph
+\usepackage{neuralnetwork}
+\tikzset{%
+  every neuron/.style={
+    circle,
+    draw,
+    minimum size=0.25cm
+  },
+  neuron missing/.style={
+    draw=none, 
+    scale=0.9,
+    text height=0.3cm,
+    execute at begin node=\color{black}$\vdots$
+  },
+}
+% ----------------------------------------------------------------------------------------------------
+% Centered vdots
+\makeatletter
+\DeclareRobustCommand
+  \cvdots{\vbox{\baselineskip4\p@ \lineskiplimit\z@
+    \hbox{.}\hbox{.}\hbox{.}}}
+\makeatother
+% ----------------------------------------------------------------------------------------------------
+% Custom table cell length i.e. C{1.5cm}
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+% ----------------------------------------------------------------------------------------------------
+\usepackage{listings}
+\lstset{
+  basicstyle=\small\ttfamily,
+  columns=flexible,
+  breaklines=true,
+  inputencoding=utf8,
+  extendedchars=true
+}
+% ----------------------------------------------------------------------------------------------------
+% theoremstyle
+\theoremstyle{definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{definition*}{Definition}
+
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem*{proposition*}{Proposition}
+
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{corollary*}{Corollary}
+
+\newtheorem*{property}{Property}
+\newtheorem*{fact}{Fact}
+\newtheorem*{example}{Example}
+\newtheorem*{solution}{Solution}
+
+\newtheorem{exercise}{Exercise}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\makeatletter
+\newenvironment{sqcases}{%
+  \matrix@check\sqcases\env@sqcases
+}{%
+  \endarray\right.%
+}
+\def\env@sqcases{%
+  \let\@ifnextchar\new@ifnextchar
+  \left\lbrack
+  \def\arraystretch{1.2}%
+  \array{@{}l@{\quad}l@{}}%
+}
+\makeatother
+% ----------------------------------------------------------------------------------------------------
+% Code
+% \usepackage{minted}
+% \usemintedstyle[python3]{pastie}
+
+% \usepackage{newfloat}
+% \DeclareFloatingEnvironment[fileext=frm,placement={!ht},name=Code]{code}
+% ----------------------------------------------------------------------------------------------------
+% Algorithm
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\MakeRobust{\Call}
+\usepackage{ebproof}
+% Inline If Statement
+\algnewcommand{\IIf}[1]{\State\algorithmicif\ #1\ \algorithmicthen}
+\algnewcommand{\EndIIf}{\unskip}
+% ----------------------------------------------------------------------------------------------------
+% Shortcuts
+\newcommand{\err}{\text{err}}
+\newcommand{\sign}{\text{sign}}
+\newcommand{\dom}{\text{dom}}
+\newcommand{\epi}{\text{epi}}
+\newcommand{\mbb}[1]{\mathbb{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+\newcommand{\xto}[1]{\overset{#1}{\longrightarrow}}
+
+% Math Shortcut
+\newcommand{\dif}{\mathop{}\!d}
+\newcommand{\floor}[1]{{\left\lfloor #1\right\rfloor}}
+\newcommand{\ceil}[1]{{\left\lceil #1\right\rceil}}
+\newcommand{\abs}[1]{{\left\lvert #1\right\rvert}}
+\newcommand{\Abs}[1]{{\left\lVert #1\right\rVert}}
+\newcommand{\innerprod}[2]{{\left\langle #1, #2\right\rangle}}
+\newcommand{\diff}[3]{{\frac{d^{#3} #1}{d {#2}^{#3}}}}
+\newcommand{\pdiff}[3]{{\frac{\partial^{#3} #1}{\partial {#2}^{#3}}}}
+
+% Crypto
+\newcommand{\PKE}{\mathsf{PKE}}
+\newcommand{\Gen}{\mathsf{KeyGen}}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Ext}{\mathsf{Ext}}
+\newcommand{\Sim}{\mathsf{Sim}}
+\newcommand{\pk}{\mathsf{pk}}
+\newcommand{\sk}{\mathsf{sk}}
+\newcommand{\KEM}{\mathsf{KEM}}
+\newcommand{\Encaps}{\mathsf{Encaps}}
+\newcommand{\Decaps}{\mathsf{Decaps}}
+\newcommand{\Sign}{\mathsf{Sign}}
+\newcommand{\Vrfy}{\mathsf{Vrfy}}
+\newcommand{\negl}{\mathsf{negl}}
+\newcommand{\poly}{\mathsf{poly}}
+\newcommand{\Adv}{\mathbf{Adv}}
+\newcommand{\Hyb}{\mathbf{Hyb}}
+\newcommand{\bit}{\{0, 1\}}
+\newcommand{\sample}{\xleftarrow{R}}
+
+% Complexity
+\newcommand{\push}{\text{push}}
+\newcommand{\pop}{\text{pop}}
+\newcommand{\leftendsym}{\triangleleft}
+\newcommand{\emptysym}{\sqcup}
+\newcommand{\Lsym}{\texttt{L}}
+\newcommand{\Rsym}{\texttt{R}}
+\newcommand{\return}{\textbf{return }}
+\newcommand{\accept}{\textbf{accept }}
+\newcommand{\reject}{\textbf{reject }}
+
+\newcommand{\co}{\mathbf{co}}
+\newcommand{\NP}{\mathbf{NP}}
+\newcommand{\NL}{\mathbf{NL}}
+\newcommand{\EXP}{\mathbf{EXP}}
+
+\newcommand{\SAT}{\mathsf{SAT}}
+
+\newcommand{\PTIME}{\mathbf{PTIME}}
+\newcommand{\PSPACE}{\mathbf{PSPACE}}
+\newcommand{\EXPTIME}{\mathbf{EXPTIME}}
+\newcommand{\EXPSPACE}{\mathbf{EXPSPACE}}
+
+\newcommand{\DTIME}{\mathbf{DTIME}}
+\newcommand{\DSPACE}{\mathbf{DSPACE}}
+
+\newcommand{\AP}{\mathbf{AP}}
+\newcommand{\APSPACE}{\mathbf{APSPACE}}
+\newcommand{\AL}{\mathbf{AL}}
+
+\newcommand{\ATIME}{\mathbf{ATIME}}
+\newcommand{\ASPACE}{\mathbf{ASPACE}}
+\newcommand{\AEXPTIME}{\mathbf{AEXPTIME}}
+\newcommand{\AEXPSPACE}{\mathbf{AEXPSPACE}}
+
+\newcommand{\PH}{\mathbf{PH}}
+\newcommand{\PPoly}{\mathbf{P}_{\text{/poly}}}
+
+\newcommand{\BPP}{\mathbf{BPP}}
+\newcommand{\MA}{\mathbf{MA}}
+\newcommand{\AM}{\mathbf{AM}}
+% ----------------------------------------------------------------------------------------------------
+% Fancy hdr
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[L]{Subtitle \\ Due date}
+\fancyhead[C]{Title \\ Subtitle}
+\fancyhead[R]{Name \\ ID}
+% ----------------------------------------------------------------------------------------------------
+\title{\LaTeX Template}
+\author{LH104729}
+\date{ }
+% ----------------------------------------------------------------------------------------------------
+\begin{document}
+\maketitle
+\end{document}
